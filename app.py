@@ -9,10 +9,7 @@ MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
 
 @app.route('/')
 def hi():
-  connection = f"mongodb+srv://admin:{MONGO_PASSWORD}@cluster0.1jxisbd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsCAFile=isrgrootx1.pem"
-  client = MongoClient(connection)
-
-  return list(client.quiz["testing"].find({}, {"_id": 0}))
+  return "hello", 200
 
 @app.route('/api/<string:quiz_type>/<string:quiz_name>', methods=['POST'])
 def map_quiz(quiz_type, quiz_name):
