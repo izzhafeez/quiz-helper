@@ -2,14 +2,23 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from flask_cors import CORS
 import os
+import sys
+import socket
 
 app = Flask(__name__)
 CORS(app)
 MONGO_PASSWORD = os.environ.get('MONGO_PASSWORD')
 
-@app.route('/')
-def hi():
-  return "hello", 200
+@app.route("/")
+def hello_world():
+    version = sys.version_info
+    res = (
+        "<h1>Hello my friends</h1>"
+        f"<h2>{os.getenv('ENV')}</h2></br>"
+        f"Running Python: {version.major}.{version.minor}.{version.micro}<br>"
+        f"Hostname: {socket.gethostname()}"
+    )
+    return res
 
 @app.route('/api/<string:quiz_type>/<string:quiz_name>', methods=['POST'])
 def map_quiz(quiz_type, quiz_name):
