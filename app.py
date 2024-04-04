@@ -85,6 +85,7 @@ def map_quiz(quiz_type, quiz_name):
 
 @app.route('/api/<string:quiz_type>/<string:quiz_name>', methods=['GET'])
 def get_map_quiz(quiz_type, quiz_name):
+  print(quiz_type, quiz_name)
   if request.method != 'GET':
     return 'Invalid request method', 405
   connection = f"mongodb+srv://admin:{MONGO_PASSWORD}@cluster0.1jxisbd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsCAFile=isrgrootx1.pem"
