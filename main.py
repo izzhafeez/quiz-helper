@@ -104,3 +104,6 @@ def get_map_quiz(quiz_type, quiz_name):
       'plays': 0
     }
   return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
