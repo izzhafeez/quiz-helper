@@ -87,8 +87,11 @@ def map_quiz(quiz_type, quiz_name):
 def get_map_quiz(quiz_type, quiz_name):
   if request.method != 'GET':
     return 'Invalid request method', 405
-  connection = f"mongodb+srv://admin:{'di1ayXVEx7Gib0Do'}@cluster0.1jxisbd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsCAFile=isrgrootx1.pem"
-  client = MongoClient(connection)
+  try:
+    connection = f"mongodb+srv://admin:{'di1ayXVEx7Gib0Do'}@cluster0.1jxisbd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&tlsCAFile=isrgrootx1.pem"
+    client = MongoClient(connection)
+  except Exception as e:
+    return str(e), 500
   result = client.quiz[quiz_type].find_one({
     'quiz_name': quiz_name
   }, {"_id": 0})
